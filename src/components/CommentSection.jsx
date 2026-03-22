@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaComment, FaEye } from 'react-icons/fa';
+import { FaComment } from 'react-icons/fa';
 import ErrorBoundary from './ErrorBoundary';
 
 class CommentSectionContent extends React.Component {
