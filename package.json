@@ -3,21 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.9.0",
+    "css-loader": "^7.1.2",
+    "file-saver": "^2.0.5",
+    "firebase": "^11.4.0",
+    "framer-motion": "^12.4.10",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.486.0",
+    "postcss-loader": "^8.1.1",
+    "qs": "^6.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.3.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.5",
+    "socket.io-client": "^4.8.1",
+    "style-loader": "^4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -35,5 +52,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "postcss-import": "^16.1.0",
+    "postcss-preset-env": "^10.1.6",
+    "tailwindcss": "^3.4.17"
   }
 }
