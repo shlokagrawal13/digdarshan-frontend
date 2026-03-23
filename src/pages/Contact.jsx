@@ -120,7 +120,7 @@ const Contact = () => {
       >
         <iframe
           title="Google Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28033.204388068268!2d77.240146!3d28.630217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfcd6fb61df3f%3A0x52d9920ddb03f741!2sWebvarta%20News%20Agency!5e0!3m2!1sen!2sin!4v1709001234567!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28033.204388068268!2d77.240146!3d28.630217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfcd6fb61df3f%3A0x52d9920ddb03f741!2sDigdarshan%20News%20Agency!5e0!3m2!1sen!2sin!4v1709001234567!5m2!1sen!2sin"
           width="100%"
           height="400"
           style={{ border: 0 }}

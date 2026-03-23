@@ -26,6 +26,7 @@ import NewsDetail from "./pages/NewsDetail";
 import { UserProvider } from './contexts/UserContext';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import VerifyEmail from "./pages/VerifyEmail";
 
 import axios from 'axios';
 import SearchResults from "./pages/SearchResults";
@@ -71,36 +72,37 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/subscription" element={<SubscriptionForm/>} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+          <Route path="/subscription" element={<SubscriptionForm />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/national" element={<NationalNews />} />
-          <Route path="/international" element={<InternationalNews/>} />
-          <Route path="/business" element={<BusinessNews/>} />
+          <Route path="/international" element={<InternationalNews />} />
+          <Route path="/business" element={<BusinessNews />} />
           <Route path="/sports" element={<SportsNews />} />
-          <Route path="/entertainment" element={<EntertainmentNews/>} />
-          <Route path="/horoscope" element={<HoroscopeNews/>} />
-          <Route path="/technology" element={<TechnologyNews/>} />
-          <Route path="/health" element={<HealthNews/>} />
-          <Route path="/education" element={<EducationNews/>} />
+          <Route path="/entertainment" element={<EntertainmentNews />} />
+          <Route path="/horoscope" element={<HoroscopeNews />} />
+          <Route path="/technology" element={<TechnologyNews />} />
+          <Route path="/health" element={<HealthNews />} />
+          <Route path="/education" element={<EducationNews />} />
           <Route path="/lifestyle" element={<LifestyleNews />} />
           <Route path="/States" element={<States />} />
           <Route path="/madhya-pradesh" element={<MadhyaPradesh />} />
           <Route path="/uttar-pradesh" element={<UttarPradesh />} />
           <Route path="/chhattisgarh" element={<Chhattisgarh />} />
           <Route path="/other-states" element={<OtherStates />} />
-          <Route 
-            path="/news-detail/:id" 
+          <Route
+            path="/news-detail/:id"
             element={
-             
-                <NewsDetail />
 
-            } 
+              <NewsDetail />
+
+            }
           />
-         
+
           <Route path="/search" element={<SearchResults />} />
-            <Route path="/NewsDownload" element={<NewsDownloadSection />} />
+          <Route path="/NewsDownload" element={<NewsDownloadSection />} />
           {/* <Route path="/national" element={<Rastriya />} /> */}
         </Routes>
         <Footer />

@@ -280,6 +280,7 @@ const Navbar = () => {
             <Link to="/health" className="px-4 py-2 hover:text-red-400" onClick={() => setMobileMenuOpen(false)}>स्वास्थ्य</Link>
             <Link to="/education" className="px-4 py-2 hover:text-red-400" onClick={() => setMobileMenuOpen(false)}>शिक्षा</Link>
             <Link to="/lifestyle" className="px-4 py-2 hover:text-red-400" onClick={() => setMobileMenuOpen(false)}>लाइफस्टाइल</Link>
+            <Link to="/NewsDownload" className="px-4 py-2 hover:text-red-400" onClick={() => setMobileMenuOpen(false)}>NewsDownload</Link>
           </div>
         </div>
       )}
