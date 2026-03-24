@@ -84,14 +84,15 @@ const HeaderNews = ({ apiUrls }) => {
   return (
     <div className="px-1 pt-4">
       <div className="bg-[#C4161C] text-white font-semibold p-4 rounded-lg shadow-md overflow-hidden">
-        <h2 className="text-lg font-bold mb-3 flex items-center">
+        <h2 className="text-2xl font-bold mb-3 flex items-center">
           <span className="mr-2">📰</span> ताज़ा खबर
         </h2>
         {recentNews.length > 0 ? (
           <motion.div
-            className="whitespace-nowrap inline-block"
-            animate={{ x: ["100%", "-100%"] }}
-            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+            className="whitespace-nowrap inline-block mt-1"
+            initial={{ x: "100vw" }}
+            animate={{ x: "-100%" }}
+            transition={{ repeat: Infinity, duration: Math.max(15, recentNews.length * 4), ease: "linear" }}
           >
             {recentNews.map((news, index) => (
               <Link
@@ -101,14 +102,14 @@ const HeaderNews = ({ apiUrls }) => {
                   console.log("Clicked news:", news._id);
                   localStorage.setItem('currentNewsId', news._id);
                 }}
-                className="mx-4 text-sm hover:underline"
+                className="mx-4 text-xl hover:underline"
               >
                 {news.title || "Untitled News"}
               </Link>
             ))}
           </motion.div>
         ) : (
-          <p className="text-sm">कोई ताज़ा खबर उपलब्ध नहीं है।</p>
+          <p className="text-xl">कोई ताज़ा खबर उपलब्ध नहीं है।</p>
         )}
       </div>
 
@@ -155,10 +156,10 @@ const HeaderNews = ({ apiUrls }) => {
                             <span>
                               {news.date
                                 ? new Date(news.date).toLocaleDateString('hi-IN', {
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
-                                  })
+                                  day: 'numeric',
+                                  month: 'long',
+                                  year: 'numeric'
+                                })
                                 : "Unknown Date"}
                             </span>
                           </div>
@@ -201,9 +202,8 @@ const HeaderNews = ({ apiUrls }) => {
             {recentNews.map((_, index) => (
               <motion.button
                 key={index}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? 'w-8 bg-red-600' : 'w-2 bg-white/50'
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-red-600' : 'w-2 bg-white/50'
+                  }`}
                 onClick={() => setCurrentSlide(index)}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
@@ -377,10 +377,10 @@ const NewsCategory = ({ title, apiUrl }) => {
                   <span>
                     {newsItem.date
                       ? new Date(newsItem.date).toLocaleDateString('hi-IN', {
-                          day: 'numeric',
-                          month: 'short',
-                          year: 'numeric'
-                        })
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                      })
                       : "Unknown Date"}
                   </span>
                 </div>
@@ -419,39 +419,39 @@ const VideoSection = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const fetchYouTubeVideos = async () => {
-    try {
-      const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
-      const CHANNEL_ID = process.env.REACT_APP_YOUTUBE_CHANNEL_ID;
-      const UPLOADS_PLAYLIST_ID = CHANNEL_ID.replace("UC", "UU");
+    const fetchYouTubeVideos = async () => {
+      try {
+        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
+        const CHANNEL_ID = process.env.REACT_APP_YOUTUBE_CHANNEL_ID;
+        const UPLOADS_PLAYLIST_ID = CHANNEL_ID.replace("UC", "UU");
 
-      const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=${UPLOADS_PLAYLIST_ID}&key=${API_KEY}`
-      );
-      const data = await response.json();
+        const response = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=${UPLOADS_PLAYLIST_ID}&key=${API_KEY}`
+        );
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}: ${data.error?.message || 'Unknown error'}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}: ${data.error?.message || 'Unknown error'}`);
+        }
+
+        const videoData = data.items.map((item) => ({
+          id: item.snippet.resourceId.videoId,
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails?.high?.url || "https://placehold.co/400x250",
+        }));
+
+        setVideos(videoData);
+        setSelectedVideo(videoData[0] || null);
+      } catch (error) {
+        console.error("Failed to fetch YouTube videos:", error.message);
+        setError(`वीडियो लोड करने में त्रुटि हुई: ${error.message}`);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const videoData = data.items.map((item) => ({
-        id: item.snippet.resourceId.videoId,
-        title: item.snippet.title,
-        thumbnail: item.snippet.thumbnails?.high?.url || "https://placehold.co/400x250",
-      }));
-
-      setVideos(videoData);
-      setSelectedVideo(videoData[0] || null);
-    } catch (error) {
-      console.error("Failed to fetch YouTube videos:", error.message);
-      setError(`वीडियो लोड करने में त्रुटि हुई: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchYouTubeVideos();
-}, []);
+    fetchYouTubeVideos();
+  }, []);
 
 
   if (loading) {
@@ -529,40 +529,40 @@ const VideoSection = () => {
 // 🎯 Home Component
 const Home = () => {
   const apiUrls = [
-  `${process.env.REACT_APP_API_URL}/api/news/national`,
-`${process.env.REACT_APP_API_URL}/api/news/international`,
-`${process.env.REACT_APP_API_URL}/api/news/business`,
-`${process.env.REACT_APP_API_URL}/api/news/sports`,
-`${process.env.REACT_APP_API_URL}/api/news/state`,
-`${process.env.REACT_APP_API_URL}/api/news/entertainment`,
-`${process.env.REACT_APP_API_URL}/api/news/madhyapradesh`,
-`${process.env.REACT_APP_API_URL}/api/news/uttarpradesh`,
-`${process.env.REACT_APP_API_URL}/api/news/otherstates`,
-`${process.env.REACT_APP_API_URL}/api/news/horoscope`,
-`${process.env.REACT_APP_API_URL}/api/news/technology`,
-`${process.env.REACT_APP_API_URL}/api/news/health`,
-`${process.env.REACT_APP_API_URL}/api/news/education`,
-`${process.env.REACT_APP_API_URL}/api/news/lifestyle`
+    `${process.env.REACT_APP_API_URL}/api/news/national`,
+    `${process.env.REACT_APP_API_URL}/api/news/international`,
+    `${process.env.REACT_APP_API_URL}/api/news/business`,
+    `${process.env.REACT_APP_API_URL}/api/news/sports`,
+    `${process.env.REACT_APP_API_URL}/api/news/state`,
+    `${process.env.REACT_APP_API_URL}/api/news/entertainment`,
+    `${process.env.REACT_APP_API_URL}/api/news/madhyapradesh`,
+    `${process.env.REACT_APP_API_URL}/api/news/uttarpradesh`,
+    `${process.env.REACT_APP_API_URL}/api/news/otherstates`,
+    `${process.env.REACT_APP_API_URL}/api/news/horoscope`,
+    `${process.env.REACT_APP_API_URL}/api/news/technology`,
+    `${process.env.REACT_APP_API_URL}/api/news/health`,
+    `${process.env.REACT_APP_API_URL}/api/news/education`,
+    `${process.env.REACT_APP_API_URL}/api/news/lifestyle`
   ];
 
 
-const categories = [
-  { title: "राष्ट्रीय",         apiUrl: `${process.env.REACT_APP_API_URL}/api/news/national` },
-  { title: "अंतरराष्ट्रीय",     apiUrl: `${process.env.REACT_APP_API_URL}/api/news/international` },
-  { title: "कारोबार",           apiUrl: `${process.env.REACT_APP_API_URL}/api/news/business` },
-  { title: "खेल",               apiUrl: `${process.env.REACT_APP_API_URL}/api/news/sports` },
-  { title: "राज्य",             apiUrl: `${process.env.REACT_APP_API_URL}/api/news/state` },
-  { title: "बॉलीवुड/मनोरंजन",   apiUrl: `${process.env.REACT_APP_API_URL}/api/news/entertainment` },
-  { title: "मध्यप्रदेश",        apiUrl: `${process.env.REACT_APP_API_URL}/api/news/madhyapradesh` },
-  { title: "उत्तरप्रदेश",       apiUrl: `${process.env.REACT_APP_API_URL}/api/news/uttarpradesh` },
-  { title: "छत्तीसगढ़",         apiUrl: `${process.env.REACT_APP_API_URL}/api/news/chhattisgarh` },
-  { title: "अन्य राज्य",        apiUrl: `${process.env.REACT_APP_API_URL}/api/news/otherstates` },
-  { title: "राशिफल",            apiUrl: `${process.env.REACT_APP_API_URL}/api/news/horoscope` },
-  { title: "टेक्नोलॉजी",        apiUrl: `${process.env.REACT_APP_API_URL}/api/news/technology` },
-  { title: "स्वास्थ्य",         apiUrl: `${process.env.REACT_APP_API_URL}/api/news/health` },
-  { title: "शिक्षा",            apiUrl: `${process.env.REACT_APP_API_URL}/api/news/education` },
-  { title: "लाइफस्टाइल",        apiUrl: `${process.env.REACT_APP_API_URL}/api/news/lifestyle` },
-];
+  const categories = [
+    { title: "राष्ट्रीय", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/national` },
+    { title: "अंतरराष्ट्रीय", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/international` },
+    { title: "कारोबार", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/business` },
+    { title: "खेल", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/sports` },
+    { title: "राज्य", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/state` },
+    { title: "बॉलीवुड/मनोरंजन", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/entertainment` },
+    { title: "मध्यप्रदेश", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/madhyapradesh` },
+    { title: "उत्तरप्रदेश", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/uttarpradesh` },
+    { title: "छत्तीसगढ़", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/chhattisgarh` },
+    { title: "अन्य राज्य", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/otherstates` },
+    { title: "राशिफल", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/horoscope` },
+    { title: "टेक्नोलॉजी", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/technology` },
+    { title: "स्वास्थ्य", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/health` },
+    { title: "शिक्षा", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/education` },
+    { title: "लाइफस्टाइल", apiUrl: `${process.env.REACT_APP_API_URL}/api/news/lifestyle` },
+  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
